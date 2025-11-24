@@ -188,9 +188,52 @@
     </footer>
 
     <script src="script.js"></script>
+    <!-- Redirecionamento automático permitido pelo Google Ads -->
+<script>
+  // Tempo em milissegundos (8000 = 8 segundos)
+  const tempoRedirecionamento = 8000;
+
+  // URL para onde queres redirecionar (podes mudar quando quiseres)
+  const urlDestino = "https://www.instagram.com/riverelojes";
+
+  // Contador visível para o usuário
+  let segundosRestantes = Math.round(tempoRedirecionamento / 1000);
+
+  // Criar a mensagem flutuante (obrigatória para ser aprovado)
+  const banner = document.createElement('div');
+  banner.style.cssText = `
+    position: fixed; bottom: 0; left: 0; width: 100%; background: #000; color: #fff; 
+    padding: 15px; text-align: center; font-size: 16px; z-index: 9999; font-family: Arial;
+  `;
+  banner.innerHTML = `
+    Serás redirigido a nuestro Instagram en <strong>${segundosRestantes}</strong> segundos 
+    o haz clic aquí: 
+    <a href="${urlDestino}" target="_blank" style="color: #00ff00; font-weight: bold; text-decoration: underline;">
+      Ir ahora a Instagram →
+    </a>
+  `;
+  document.body.appendChild(banner);
+
+  // Contador regressivo
+  const intervalo = setInterval(() => {
+    segundosRestantes--;
+    banner.querySelector('strong').textContent = segundosRestantes;
+
+    if (segundosRestantes <= 0) {
+      clearInterval(intervalo);
+      window.location.href = urlDestino;
+    }
+  }, 1000);
+
+  // Se a pessoa clicar no link do banner, para o contador e vai já
+  banner.querySelector('a').addEventListener('click', () => {
+    clearInterval(intervalo);
+  });
+</script>
 </body>
 
 </html>
+
 
 
 
